@@ -20,4 +20,8 @@ public class FieldConfigurationService {
     public FieldConfiguration createFieldConfiguration(FieldConfiguration fieldConfig) {
         return fieldConfigurationRepository.save(fieldConfig);
     }
+    
+    public void deleteFieldConfiguration(Long id) {
+        fieldConfigurationRepository.deleteById(id);
+    }
 }

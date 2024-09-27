@@ -26,4 +26,9 @@ public class TaskService {
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
     }
+    
+    // Method to delete a task by its ID
+    public void deleteTaskById(Long taskId) {
+        taskRepository.deleteById(taskId);
+    }
 }
