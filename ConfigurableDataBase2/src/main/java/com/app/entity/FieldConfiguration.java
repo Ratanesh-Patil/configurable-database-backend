@@ -1,5 +1,7 @@
 package com.app.entity;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class FieldConfiguration {
@@ -8,7 +10,12 @@ public class FieldConfiguration {
     private Long id;
 
     private String fieldName;
-    private String fieldType; // E.g., text, number, etc.
+    private String fieldType; // E.g., text, number, dropdown, etc.
+
+    @ElementCollection
+    @CollectionTable(name = "field_options", joinColumns = @JoinColumn(name = "field_id"))
+    @Column(name = "option_value")
+    private List<String> options; // List of options for dropdown
 
     // Getters and Setters
     public Long getId() {
@@ -33,5 +40,13 @@ public class FieldConfiguration {
 
     public void setFieldType(String fieldType) {
         this.fieldType = fieldType;
+    }
+
+    public List<String> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<String> options) {
+        this.options = options;
     }
 }

@@ -1,5 +1,6 @@
 package com.app.controller;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ import com.app.service.TaskService;
 
 @RestController
 @RequestMapping("/api/tasks")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin("*")
 public class TaskController {
 
     @Autowired
@@ -67,4 +68,14 @@ public class TaskController {
         taskService.deleteTaskById(taskId);
         return ResponseEntity.noContent().build();
     }
+    
+    @PostMapping("/add-dropdown-field/{taskId}")
+    public Task addDropdownField(@PathVariable Long taskId, @RequestBody Map<String, String> fieldData) {
+        String fieldName = fieldData.get("fieldName");
+        String fieldValue = fieldData.get("fieldValue");
+        
+        // Validate field configuration here, if necessary
+        return taskService.addFieldToTask(taskId, fieldName, fieldValue);
+    }
+
 }
